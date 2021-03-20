@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+            crossorigin="anonymous"></script>
+    <script src="bs_dialogs.js"></script>
+
+</head>
+<body class="m-2">
+
+<button id="ok_cancel" class="btn btn-secondary m-2">ok_cancel</button>
+<button id="yes_no" class="btn btn-secondary m-2">yes_no</button>
+<button id="ok" class="btn btn-secondary m-2">ok</button>
+<button id="custom" class="btn btn-secondary m-2">custom</button>
+<button id="form" class="btn btn-secondary m-2">form</button>
+<button id="form_loop" class="btn btn-secondary m-2">form_loop</button>
+
+<script>
+    window.onload = async function () {
+        document.getElementById('ok_cancel').onclick = async function () {
+            let ret = await new BsDialogs().ok_cancel('header', 'body')
+            console.log(ret)
+        }
+
+        document.getElementById('yes_no').onclick = async function () {
+            let ret = await new BsDialogs().yes_no('header', 'body')
+            console.log(ret)
+        }
+
+        document.getElementById('ok').onclick = async function () {
+            let ret = await new BsDialogs().ok('header', 'body')
+            console.log(ret)
+        }
+
+        document.getElementById('custom').onclick = async function () {
+            let ret = await new BsDialogs().custom('header', 'body',
+                [
+                    ['Show', 'btn-warning', 'show'],
+                    ['Abort', 'btn-secondary', 'abort'],
+                    ['Yes', 'btn-primary', 'yes']
+                ]
+            )
+            console.log(ret)
+        }
+
+        let frm = `<form>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Email address</label>
+    <input type="email" data-name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+  </div>
+</form>`
+
+        document.getElementById('form').onclick = async function () {
+            let dlg = new BsDialogs()
+            dlg.form('header', 'Send', frm)
+            let ret = await dlg.onsubmit()
+            console.log(ret)
+        }
+
+        document.getElementById('form_loop').onclick = async function () {
+            let dlg = new BsDialogs()
+            dlg.form('header', 'Send', frm)
+
+            while (true) {
+                let ret = await dlg.onsubmit(true)
+                if (ret === undefined) { // if close
+                    break
+                }
+                if (ret['email'].slice(-4) === '.com') {
+                    // we carry out the necessary actions
+                    break
+                } else {
+                    await new BsDialogs().ok('Enter the correct value', 'Only .com domain!')
+                }
+            }
+            dlg.close()
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,4 +1,11 @@
-# Simple dialogs based on Bootstrap modal
+# Simple dialogs based on Bootstrap 5 modal
+
+Lightweight pure js dialogs library, min ad gz size less 2 kB
+
+> Dependencies
+>* bootstrap 5
+
+[demo](https://jsfiddle.net/Alexander_Titov/z8dfpLyw/8)
 
 ## Dialogs
 
@@ -73,7 +80,7 @@ let frm = `<form>
 
 let dlg = new BsDialogs()
 dlg.form('header', 'Send', frm)
-ret = await dlg.onsubmit()
+let ret = await dlg.onsubmit()
 console.log(ret)  // {email: test@test.com}
 ```
 
