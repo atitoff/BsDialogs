@@ -201,4 +201,8 @@ class BsDialogs {
             } catch {
             }
         }
+
+        set append_body(el){
+            this._modal_body.appendChild(el)
+        }
     }

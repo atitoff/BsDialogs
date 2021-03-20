@@ -20,9 +20,10 @@ let ret = await new BsDialogs().ok_cancel('header', 'body')
 ![](ok_cancel.png)
 
 #### Options
-`await new BsDialogs(options)`
+`new BsDialogs(options)`
 
 ```js
+// default values
 let options = {
     centered: true,
     backdrop: 'static',
