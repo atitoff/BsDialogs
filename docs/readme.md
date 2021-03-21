@@ -27,6 +27,8 @@ let ret = await new BsDialogs().ok_cancel('header', 'body')
 let options = {
     centered: true,
     backdrop: 'static',
+    keyboard: true,
+    focus: true,
     close: true,  // show close button
     size: '',
     fullscreen: null,
@@ -38,6 +40,9 @@ let options = {
 
 > fullscreen: `null || '' || 'sm-down' || 'md-down' || 'lg-down' || 'xl-down' || 'xxl-down'`  
 > [more details](https://getbootstrap.com/docs/5.0/components/modal/#fullscreen-modal)
+
+> backdrop, keyboard, focus: [more details](https://getbootstrap.com/docs/5.0/components/modal/#options)
+
 
 ### yes_no
 ```js

@@ -25,7 +25,7 @@
 <script>
     window.onload = async function () {
         document.getElementById('ok_cancel').onclick = async function () {
-            let ret = await new BsDialogs().ok_cancel('header', 'body')
+            let ret = await new BsDialogs({backdrop: true}).ok_cancel('header', 'body')
             console.log(ret)
         }
 
@@ -59,7 +59,7 @@
 </form>`
 
         document.getElementById('form').onclick = async function () {
-            let dlg = new BsDialogs()
+            let dlg = new BsDialogs({backdrop: true})
             dlg.form('header', 'Send', frm)
             let ret = await dlg.onsubmit()
             console.log(ret)
