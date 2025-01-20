@@ -94,6 +94,11 @@ class BsDialogs {
             }
 
         });
+        frm.querySelectorAll("select").forEach(function (selector) {
+            if (selector.dataset.name) {
+                ret_dict[selector.dataset.name] = selector.value
+            }
+        })
         return ret_dict
     }
 
